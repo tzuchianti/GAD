@@ -1,0 +1,60 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+ <div>
+  <!--<h1> 總務場地申請作業 test 123</h1>
+  <p>Welcome to LocalLibrary, a website developed by <em>Mozilla Developer Network</em>!</p>-->
+  <h2>動態內容顯示 </h2>
+  <p>場地記錄查詢:</p>
+  <ul>
+    <li><strong>場地:</strong> {{ num_venues }}</li>
+    <li><strong>場地副本:</strong> {{ num_instances }}</li>
+    <li><strong> 場地副本提供:</strong> {{ num_instances_available }}</li>
+    <li><strong>活動申請人:</strong> {{ num_activityusers }}</li>
+  </ul>
+
+  <p> 你已經拜訪此頁面  {{ num_visits }} {% if num_visits == 1 %} time {% else %} 次 {% endif %} </p>
+</div>
+
+<!-- ########forms######## -->
+<div>
+<h2 align="left">顯示資料表所有資料&nbsp;&nbsp;
+<a href="add_venue" class="btn btn-success">新增</a>&nbsp;&nbsp;</h2>
+<!--<a href="add_venueinstance" class="btn btn-success">新增2</a>&nbsp;&nbsp;</h2>-->
+<form action="." method="POST" name="form1">
+
+{% csrf_token %}
+<!--<table border="1" cellpadding="0" cellspacing="0">-->
+<table class="table table-bordered table-striped">
+<thead class="thead-dark">
+  <tr>
+	  <!--<th>編號</th>--><th>場地名稱</th><th>活動申請人</th><th>地區</th>
+	  <th>會所名稱</th><th>場地特性</th><th>容納人數</th><th>影音設備</th>
+    <th>適合活動</th><th>場地管理人</th><th>分機.</th><th>管理</th>
+  </tr>
+</thead>
+<tbody>
+	{% for venue in venues %}
+		<tr>
+			<!--<td>{{ venue.id }} </td>-->
+			<td>{{ venue.site_name }} </td>
+			<td>{{ venue.activityuser}} </td>
+			<td>{{ venue.area }} </td>
+			<td>{{ venue.club_name }} </td>
+			<td>{{ venue.site_feature}} </td>
+			<td>{{ venue.capacity }} </td>
+      <td>{{ venue.av_device }} </td>
+      <td>{{ venue.suitable }} </td>
+      <td>{{ venue.venuemanager }} </td>
+      <td>{{ venue.venuemanager.extension }} </td>
+            <td>
+                <a href="{% url 'venue-edit' venue.id %}" title="編輯" class="btn btn-info">編輯</a>	
+                <a href="{% url 'venue-delete' venue.id %}" title="刪除" class="btn btn-danger">刪除</a>
+            </td>
+		</tr>
+	{% endfor %}
+</tbody>
+</table>
+</form>
+</div>
+  {% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1> 活動管理 </h1>
+<table class="table table-bordered table-striped">
+<thead class="thead-dark">
+  <tr>
+	  <!--<th>編號</th>--><th>活動名稱</th><th>活動申請人</th><th>地區</th>
+	  <th>會所名稱</th><th>場地特性</th><th>容納人數</th><th>影音設備</th>
+    <th>適合活動</th><!--<th>場地管理人</th><th>Ext.</th>--><th>管理</th>
+  </tr>
+</thead>
+<tbody>
+	{% for veninst in venueinstances %}
+		<tr>
+			<!--<td>{{ venue.id }} </td>-->
+			<td>{{  veninst.activity_name }} </td>
+			<td>{{ veninst.activity_attr}} </td>
+			<td>{{ veninst.activity_category }} </td>
+			<td>{{ veninst.activity_people }} </td>
+			<td>{{ veninst.activity_start}} </td>
+			<td>{{ veninst.activity_end }} </td>
+      <td>{{ veninst.meals_number }} </td>
+      <td>{{ veninst.sound_control }} </td>
+      <!--<td>{{ venue.venuemanager }} </td>
+      <td>{{ venue.venuemanager.extension }} </td>-->
+            <td>
+                <a href="{% url 'venue-edit' venue.id %}" title="編輯" class="btn btn-info">編輯</a>	
+                <a href="{% url 'venue-delete' venue.id %}" title="刪除" class="btn btn-danger">刪除</a>
+            </td>
+		</tr>
+	{% endfor %}
+</tbody>
+</table>
+
+{% endblock %}

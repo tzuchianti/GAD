@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Borrowed venues</h1>
+
+    {% if venueinstance_list %}
+    <ul>
+
+      {% for venueinst in venueinstance_list %}
+      <li class="{% if venueinst.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'venue-detail' venueinst.venue.pk %}">{{venueinst.venue.site_name}}</a> ({{ venueinst.due_back }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>There are no books borrowed.</p>
+    {% endif %}
+{% endblock %}
