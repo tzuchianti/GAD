@@ -8,6 +8,7 @@ class VenueForm(ModelForm):
     class Meta:
         model = Venue
         fields = "__all__"
+        exclude = ['activityuser']
         labels = {
             'site_name': '場地名稱',
             'activityuser' : '選擇活動申請人',
@@ -35,6 +36,8 @@ class   VenueInstanceForm(ModelForm):
     class Meta:
         model = VenueInstance
         fields = "__all__"
+        exclude = ['space_use', 'user_service', 'report', 'message', 'status', 'borrower']
+        #field = ['id', 'venue', 'activity_start', 'activity_end', 'activity_name', 'activity_attr','activity_category', 'activity_people', 'meals_number', 'sound_control',]
         labels = {
             'id':'編號',
             'venue':'選擇場地',

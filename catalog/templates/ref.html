@@ -1,0 +1,15 @@
+<!-- index.html first block context -->
+<div>
+  <!--<h1> 總務場地申請作業 test 123</h1>
+  <p>Welcome to LocalLibrary, a website developed by <em>Mozilla Developer Network</em>!</p>-->
+  <h2>動態內容顯示 </h2>
+  <p>場地記錄查詢:</p>
+  <ul>
+    <li><strong>場地:</strong> {{ num_venues }}</li>
+    <li><strong>場地副本:</strong> {{ num_instances }}</li>
+    <li><strong> 場地副本提供:</strong> {{ num_instances_available }}</li>
+    <li><strong>活動申請人:</strong> {{ num_activityusers }}</li>
+  </ul>
+
+  <p> 你已經拜訪此頁面  {{ num_visits }} {% if num_visits == 1 %} time {% else %} 次 {% endif %} </p>
+</div>

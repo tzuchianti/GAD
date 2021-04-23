@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
+  <p>您的帳號密碼有誤，請重新輸入。</p>
 {% endif %}
 
 {% if next %}
@@ -11,7 +11,7 @@
     <p>Your account doesn't have access to this page. To proceed,
     please login with an account that has access.</p>
   {% else %}
-    <p>Please login to see this page.</p>
+    <p>請登入</p>
   {% endif %}
 {% endif %}
 
@@ -28,12 +28,12 @@
 </div>
 
 <div>
-  <input type="submit" value="login" />
+  <input type="submit" value="登入" />
   <input type="hidden" name="next" value="{{ next }}" />
 </div>
 </form>
 
 {# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+<p><a href="{% url 'password_reset' %}">忘記密碼 ?</a></p>
 
 {% endblock %}
