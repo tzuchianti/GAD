@@ -37,7 +37,7 @@
            {% if user.is_authenticated %}
             <li> 申請人: {{ user.get_username }}</li>
               <!--<li><a href="{% url 'add-venueinstance' %}">Add Venue</a></li>-->
-              <li><a href="{% url 'index' %}">首頁</a>
+              <li><a href="{% url 'index' %}">場地資料</a>
             <h3>申請</h3>
               <li><a href="{% url 'venues' %}">場地管理</a></li>
               <li><a href="{% url 'add-venueinstance' %}">活動申請</a></li>

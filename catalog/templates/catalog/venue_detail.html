@@ -1,15 +1,16 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Title: {{ venue.site_name }}</h1>
+  <h1>場地名稱: {{ venue.site_name }}</h1>
 
-  <p><strong>Author:</strong> <a href="">{{ venue.area }}</a></p> <!-- author detail link not yet defined -->
-  <p><strong>Area:</strong> {{ venue.area }}</p>
-  <p><strong>Clubhouse:</strong> {{ venue.club_name }}</p>
-  <p><strong>Feature:</strong> {{ venue.site_feature }}</p>
-  <p><strong>Capacity:</strong> {{ venue.capacity }}</p>
-  <p><strong>AV_device:</strong> {{ venue.av_device }}</p>
-  <p><strong>Suitable:</strong> {{ venue.suitable }}</p>
+  <!--<p><strong>Author:</strong> <a href="">{{ venue.area }}</a></p> -->
+  <!-- author detail link not yet defined -->
+  <p><strong>地區:</strong> {{ venue.area }}</p>
+  <p><strong>會所名稱:</strong> {{ venue.club_name }}</p>
+  <p><strong>場地特性:</strong> {{ venue.site_feature }}</p>
+  <p><strong>容納人數:</strong> {{ venue.capacity }}</p>
+  <p><strong>影音設備:</strong> {{ venue.av_device }}</p>
+  <p><strong>適合活動:</strong> {{ venue.suitable }}</p>
   <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 
   <div style="margin-left:20px;margin-top:20px">
