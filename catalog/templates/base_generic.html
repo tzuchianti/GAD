@@ -32,23 +32,26 @@
           {% block sidebar %}
           <ul class="sidebar-nav">
             <br/>
-            <li><a href="{% url 'index' %}">首頁</a></li>
-            <!--<li><a href="{% url 'add-venueinstance' %}">Add Venue</a></li>-->
-            <h3>申請</h3>
-            <li><a href="{% url 'venues' %}">場地管理</a></li>
-            <li><a href="{% url 'add-venueinstance' %}">活動申請</a></li>
-            <h3>系統管理</h3>
-            <li><a href="{% url 'activityusers' %}">申請人管理</a></li>
-            <li><a href="{% url 'venueinstances' %}">活動管理</a></li>
-            <li><a href="">統計分析</a></li>
-            <li><a href="">記錄查詢</a></li>
+            <!--<li><a href="{% url 'index' %}">首頁</a></li>-->
+            <!-- against authenticated users start-->
            {% if user.is_authenticated %}
-            <li>User: {{ user.get_username }}</li>
+            <li> 申請人: {{ user.get_username }}</li>
+              <!--<li><a href="{% url 'add-venueinstance' %}">Add Venue</a></li>-->
+              <li><a href="{% url 'index' %}">首頁</a>
+            <h3>申請</h3>
+              <li><a href="{% url 'venues' %}">場地管理</a></li>
+              <li><a href="{% url 'add-venueinstance' %}">活動申請</a></li>
+            <h3>系統管理</h3>
+              <li><a href="{% url 'activityusers' %}">申請人管理</a></li>
+              <li><a href="{% url 'venueinstances' %}">活動管理</a></li>
+              <li><a href="">統計分析</a></li>
+              <li><a href="">記錄查詢</a></li>
               <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
               <li><a href="{% url 'logout'%}?next={{request.path}}">登出</a></li>
               {% else %}
               <li><a href="{% url 'login'%}?next={{request.path}}">帳號登入</a></li>
               {% endif %}
+            <!-- against authenticated users end -->
           </ul>
           {% endblock %}
         </div>

@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import  permission_required
 @permission_required('catalog.can_mark_returned')
 @permission_required('catalog.can_edit')
 def  my_view(request):
-    pass
+   pass
 
 class LoanedVenuesByUserListView(LoginRequiredMixin,generic.ListView):
     """Generic class-based view listing books on loan to current user."""
@@ -27,7 +27,14 @@ class LoanedVenuesByUserListView(LoginRequiredMixin,generic.ListView):
 #     redirect_field_name = 'redirect_to'
 
 
-def index(request):
+class IndexListView(generic.ListView):
+    model = Venue
+    paginate_by = 20
+    #context_object_name = 'my_book_list'   # your own name for the list as a template variable
+    #queryset = Book.objects.filter(title__icontains='Game')[:4] # Get 5 books containing the title war
+    template_name = 'index.html'  # Specify your own template name/location
+
+def venues(request):
     """View function for home page of site."""
 
     #get currnet year
@@ -61,16 +68,16 @@ def index(request):
     }
 
     # Render the HTML template index.html with the data in the context variable
-    return render(request, 'index.html', context=context)
+    return render(request, 'catalog/venue_list.html', context=context)
     #return render(request, 'index.html', {'venues':venues, 'current_year':current_year,})
 
 
-class VenueListView(generic.ListView):
-    model = Venue
-    paginate_by = 20
-    #context_object_name = 'my_book_list'   # your own name for the list as a template variable
-    #queryset = Book.objects.filter(title__icontains='Game')[:4] # Get 5 books containing the title war
-    template_name = 'venues/venue_list.html'  # Specify your own template name/location
+# class VenueListView(generic.ListView):
+#     model = Venue
+#     paginate_by = 20
+#     #context_object_name = 'my_book_list'   # your own name for the list as a template variable
+#     #queryset = Book.objects.filter(title__icontains='Game')[:4] # Get 5 books containing the title war
+#     template_name = 'venues/venue_list.html'  # Specify your own template name/location
     
 
 class VenueDetailView(generic.DetailView):
@@ -108,7 +115,7 @@ def venueedit(request, id=0):
         else:
             venue = Venue.objects.get(pk = id)
             form =  VenueForm(instance = venue)
-        return render(request, "catalog/venue_update.html",{'form':form})
+        return render(request, "/catalog/venue_update.html",{'form':form})
     else:
         if id ==0:
             form = VenueForm(request.POST)
@@ -117,13 +124,13 @@ def venueedit(request, id=0):
             form = VenueForm(request.POST, instance = venue)
         if form.is_valid():
             form.save()
-        return redirect('index')
+        return redirect('venues')
 
     
 def venuedelete(request, id):
     venue = Venue.objects.get(pk = id)
     venue.delete()
-    return redirect('index')
+    return redirect('venues')
   
 
 # def delete(request,id=None):  #刪除資料

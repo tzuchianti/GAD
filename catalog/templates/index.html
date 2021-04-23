@@ -1,46 +1,19 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
- 
-<!-- ########forms######## -->
-<div>
-<h2 align="left">顯示資料表所有資料&nbsp;&nbsp;
-<a href="add_venue" class="btn btn-success">新增</a>&nbsp;&nbsp;</h2>
-<!--<a href="add_venueinstance" class="btn btn-success">新增2</a>&nbsp;&nbsp;</h2>-->
-<form action="." method="POST" name="form1">
+  <br/>
+  <h1> 場地申請 </h1>
 
-{% csrf_token %}
-<!--<table border="1" cellpadding="0" cellspacing="0">-->
-<table class="table table-bordered table-striped">
-<thead class="thead-dark">
-  <tr>
-	  <!--<th>編號</th>--><th>場地名稱</th><!--<th>活動申請人</th>--><th>地區</th>
-	  <th>會所名稱</th><th>場地特性</th><th>容納人數</th><th>影音設備</th>
-    <th>適合活動</th><th>場地管理人</th><th>分機.</th><th>管理</th>
-  </tr>
-</thead>
-<tbody>
-	{% for venue in venues %}
-		<tr>
-			<!--<td>{{ venue.id }} </td>-->
-			<td>{{ venue.site_name }} </td>
-			<!--<td>{{ venue.activityuser}} </td>-->
-			<td>{{ venue.area }} </td>
-			<td>{{ venue.club_name }} </td>
-			<td>{{ venue.site_feature}} </td>
-			<td>{{ venue.capacity }} </td>
-      <td>{{ venue.av_device }} </td>
-      <td>{{ venue.suitable }} </td>
-      <td>{{ venue.venuemanager }} </td>
-      <td>{{ venue.venuemanager.extension }} </td>
-            <td>
-                <a href="{% url 'venue-edit' venue.id %}" title="編輯" class="btn btn-info">編輯</a>	
-                <a href="{% url 'venue-delete' venue.id %}" title="刪除" class="btn btn-danger">刪除</a>
-            </td>
-		</tr>
-	{% endfor %}
-</tbody>
-</table>
-</form>
-</div>
-  {% endblock %}
+ {% if venue_list  %}
+  <ul>
+    {% for venue in venue_list %}
+      <li>
+        <a href="{{ venue.get_absolute_url }}">{{ venue.site_name }}</a> ({{venue.club_name}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no site in the Venue.</p>
+  {% endif %} 
+
+{% endblock %}
