@@ -2,11 +2,17 @@ from django.shortcuts import render,redirect
 from django.views import generic
 from datetime import datetime
 from .models import ActivityUser,Venue,VenueManager,VenueInstance
-from .forms import VenueForm,VenueInstanceForm
+from .forms import VenueForm,VenueInstanceForm, ActivityUserForm
 # Create your views here.
 from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import  permission_required
+
+
+#from django.contrib.auth import logout
+# def logout_view(request):
+#     logout(request)
+#     return redirect('logout')
 
 
 @permission_required('catalog.can_mark_returned')
@@ -76,18 +82,30 @@ def venues(request):
 class VenueDetailView(generic.DetailView):
     model = Venue
     
-class ActivityUserListView(generic.ListView):
-    model = ActivityUser
-    template_name = 'activityusers/activityuser_list.html' 
+# class ActivityUserListView(generic.ListView):
+#     model = ActivityUser
+#     template_name = 'activityusers/activityuser_list.html' 
+ 
+def activityusers_list(request):
+    activityusers = ActivityUser.objects.all().order_by('-id')
+    return render(request, 'catalog/activityusers_list.html', {'activityusers':activityusers})
+
+     
+# class VenueInstanceListView(generic.ListView):
+#     model = VenueInstance
+#     venueinstances = VenueInstance.objects.all().order_by('activity_start')
+#     template_name = 'VenueInstances/venueinstance_list.html' 
     
-class VenueInstanceListView(generic.ListView):
-    model = VenueInstance
-    venueinstances = VenueInstance.objects.all().order_by('activity_start')
-    template_name = 'VenueInstances/venueinstance_list.html' 
-    
+def venueinstances_list(request):
+    venueinstances = VenueInstance.objects.all()
+    context = {
+        'venueinstances':venueinstances
+    }
+    return render(request, 'catalog/venueinstances_list.html', context=context)
+
     
 # VenueForm setting
-def  add_venue(request):
+def add_venue(request):
     submitted = False
     if request.method == "POST" :
         form = VenueForm(request.POST)
@@ -108,7 +126,7 @@ def venueedit(request, id=0):
         else:
             venue = Venue.objects.get(pk = id)
             form =  VenueForm(instance = venue)
-        return render(request, "/catalog/venue_update.html",{'form':form})
+        return render(request, "catalog/venue_update.html", {'form':form})
     else:
         if id ==0:
             form = VenueForm(request.POST)

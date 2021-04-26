@@ -1,0 +1,42 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1> 申請人管理 </h1>
+
+<table class="table table-bordered table-striped">
+<thead class="thead-dark">
+  <tr>
+	  <!--<th>編號</th>--><th>身份別</th><th>姓名</th><th>部門</th>
+	  <th>信箱</th><th>電話</th><th>雲端分機</th><th>管理</th>
+  </tr>
+</thead>
+<tbody>
+	{% for actusers in activityusers %}
+		<tr>
+			<!--<td>{{ venue.id }} </td>-->
+			<td>{{  actusers.identity }} </td>
+			<td>{{ actusers.name}} </td>
+			<td>{{ actusers.department }} </td>
+			<td>{{ actusers.e_mail }} </td>
+			<td>{{ actusers.telephone}} </td>
+			<td>{{ actusers.extension }} </td>
+            <td><!--need to modify-->
+                <a href="{% url 'venue-edit' actusers.id %}" title="編輯" class="btn btn-info">編輯</a>	
+                <a href="{% url 'venue-delete' actusers.id %}" title="刪除" class="btn btn-danger">刪除</a>
+            </td>
+		</tr>
+	{% endfor %}
+</tbody>
+</table>
+
+  <!--<p>Welcome to LocalLibrary, a website developed by <em>Mozilla Developer Network</em>!</p>
+  
+  <h2>Dynamic content</h2>
+  <p>The library has the following record counts:</p>
+  <ul>
+    <li><strong>Books:</strong> {{ num_books }}</li>
+    <li><strong>Copies:</strong> {{ num_instances }}</li>
+    <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
+    <li><strong>Authors:</strong> {{ num_authors }}</li>
+  </ul>-->
+{% endblock %}

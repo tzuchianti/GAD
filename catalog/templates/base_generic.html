@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     {% block title %}
-    <title>Local Library</title>
+    <title>總務場地申請作業</title>
     {% endblock %}
 
     <!-- include 'catalog/navbar.html'  -->
@@ -42,14 +42,14 @@
               <li><a href="{% url 'venues' %}">場地管理</a></li>
               <li><a href="{% url 'add-venueinstance' %}">活動申請</a></li>
             <h3>系統管理</h3>
-              <li><a href="{% url 'activityusers' %}">申請人管理</a></li>
-              <li><a href="{% url 'venueinstances' %}">活動管理</a></li>
+              <li><a href="{% url 'activityusers-list' %}">申請人管理</a></li>
+              <li><a href="{% url 'venueinstances-list' %}">活動管理</a></li>
               <li><a href="">統計分析</a></li>
               <li><a href="">記錄查詢</a></li>
               <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
-              <li><a href="{% url 'logout'%}?next={{request.path}}">登出</a></li>
+              <li><a href="{% url 'logout' %}">登出</a></li>
               {% else %}
-              <li><a href="{% url 'login'%}?next={{request.path}}">帳號登入</a></li>
+              <!--<li><a href="{% url 'login'%}?next={{request.path}}">帳號登入</a></li>-->
               {% endif %}
             <!-- against authenticated users end -->
           </ul>
