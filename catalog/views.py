@@ -10,12 +10,6 @@ from django.contrib.auth.decorators import  permission_required
 import uuid
 
 
-#from django.contrib.auth import logout
-# def logout_view(request):
-#     logout(request)
-#     return redirect('logout')
-
-
 @permission_required('catalog.can_mark_returned')
 @permission_required('catalog.can_edit')
 def  my_view(request):
