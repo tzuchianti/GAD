@@ -2,10 +2,10 @@
 
 {% block content %}
         
-        <h3> 活動申請單</h3>
+        <h3> 申請人申請單</h3>
         <br/>
         {% if submitted %}
-                    活動申請成功 !!!
+                    申請人申請成功 !!!
         {% else %}
             <form action = "" method = POST>
                 {% csrf_token %}
@@ -17,7 +17,7 @@
                         <input type = "submit" value = "送出" class = "btn btn-success">
                     </div>
                     <div class="col-md-4">
-                        <a href="{% url 'venueinstances-list' %}" class = "btn btn-secondary btn-block btn-log">
+                        <a href="{% url 'activityusers-list' %}" class = "btn btn-secondary btn-block btn-log">
                                 <i class = "fas fa-stream"></i> 回上一頁
                         </a>
                     </div>

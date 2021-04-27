@@ -13,7 +13,12 @@ urlpatterns = [
     #path('venueinstances/',views.VenueInstanceListView.as_view(), name = 'venueinstances'),
     path('myvenuess/', views.LoanedVenuesByUserListView.as_view(), name='my-borrowed'),
     path('add_venue', views.add_venue, name = 'add-venue'),
+    path('add_activityuser/', views.add_activityuser, name='add-activityuser'),
     path('add_venueinstance/',views.add_venueinstance, name = 'add-venueinstance'),
     path('<int:id>/', views.venueedit, name='venue-edit'),
+    path('activityuser_edit/<int:id>/', views.activityuseredit, name='activityuser-edit'),
+    path('venueinstance_edit/<uuid:id>/', views.venueinstanceedit, name='venueinstance-edit'),
     path('delete/<int:id>',views.venuedelete, name = 'venue-delete'),
+    path('activityuser_list/delete/<int:id>',views.activityuserdelete, name = 'activityuser-delete'),
+    path('venueinstance_list/delete/<uuid:id>',views.venueinstancedelete, name = 'venueinstance-delete'),
 ]

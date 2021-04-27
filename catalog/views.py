@@ -7,6 +7,7 @@ from .forms import VenueForm,VenueInstanceForm, ActivityUserForm
 from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import  permission_required
+import uuid
 
 
 #from django.contrib.auth import logout
@@ -103,7 +104,7 @@ def venueinstances_list(request):
     }
     return render(request, 'catalog/venueinstances_list.html', context=context)
 
-    
+########################ADD######################   
 # VenueForm setting
 def add_venue(request):
     submitted = False
@@ -118,7 +119,36 @@ def add_venue(request):
                 submitted = True
             return render(request, 'catalog/add_venue.html', {'form':form, 'submitted':submitted})
 
+def add_activityuser(request):
+    submitted = False
+    if request.method == "POST" :
+        form = ActivityUserForm(request.POST)
+        if form .is_valid():
+            form.save()
+            return HttpResponseRedirect('/catalog/add_activityuser?submitted=True')
+    else:
+            form = ActivityUserForm
+            if 'submitted' in request.GET:
+                submitted = True
+            return render(request, 'catalog/add_activityuser.html', {'form':form, 'submitted':submitted})
 
+#venueinstanceform  setting
+def  add_venueinstance(request):
+    submitted = False
+    if request.method == "POST" :
+        form = VenueInstanceForm(request.POST)
+        if form .is_valid():
+            form.save()
+            return HttpResponseRedirect('/catalog/add_venueinstance?submitted=True')
+    else:
+            form = VenueInstanceForm
+            if 'submitted' in request.GET:
+                submitted = True
+            return render(request, 'catalog/add_venueinstance.html', {'form':form, 'submitted':submitted})
+
+
+
+####################EDIT#########################
 def venueedit(request, id=0):
     if request.method == "GET":
         if id ==0:
@@ -137,26 +167,58 @@ def venueedit(request, id=0):
             form.save()
         return redirect('venues')
 
-    
+def activityuseredit(request, id=0):
+    if request.method == "GET":
+        if id ==0:
+            form = ActivityUserForm()
+        else:
+            activityuser = ActivityUser.objects.get(pk = id)
+            form =  ActivityUserForm(instance = activityuser)
+        return render(request, "catalog/activityuser_update.html", {'form':form})
+    else:
+        if id ==0:
+            form = ActivityUserForm(request.POST)
+        else:
+            activityuser = ActivityUser.objects.get(pk = id)
+            form =  ActivityUserForm(request.POST, instance = activityuser)
+        if form.is_valid():
+            form.save()
+        return redirect('activityusers-list')
+
+def venueinstanceedit(request, id=0):
+    if request.method == "GET":
+        if id ==0:
+            form = VenueInstanceForm()
+        else:
+            venueinstance = VenueInstance.objects.get(pk = id)
+            form =  VenueInstanceForm(instance = venueinstance)
+        return render(request, "catalog/venueinstance_update.html", {'form':form})
+    else:
+        if id ==0:
+            form = VenueInstanceForm(request.POST)
+        else:
+            venueinstance = VenueInstance.objects.get(pk = id)
+            form = VenueInstanceForm(request.POST, instance = venueinstance)
+        if form.is_valid():
+            form.save()
+        return redirect('venueinstances-list')
+
+##############Delete################
 def venuedelete(request, id):
     venue = Venue.objects.get(pk = id)
     venue.delete()
     return redirect('venues')
-  
 
-#venueinstanceform  setting
-def  add_venueinstance(request):
-    submitted = False
-    if request.method == "POST" :
-        form = VenueInstanceForm(request.POST)
-        if form .is_valid():
-            form.save()
-            return HttpResponseRedirect('/catalog/add_venueinstance?submitted=True')
-    else:
-            form = VenueInstanceForm
-            if 'submitted' in request.GET:
-                submitted = True
-            return render(request, 'catalog/add_venueinstance.html', {'form':form, 'submitted':submitted})
+def activityuserdelete(request, id):
+    activityuser = ActivityUser.objects.get(pk = id)
+    activityuser.delete()
+    return redirect('activityusers-list')
+
+def venueinstancedelete(request, id):
+    venueinstance = VenueInstance.objects.get(pk = id)
+    venueinstance.delete()
+    return redirect('venueinstances-list')
+
 
 
  

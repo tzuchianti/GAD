@@ -2,18 +2,25 @@
 
 {% block content %}
   <h1> 申請人管理 </h1>
+<div>
+<h2 align="left">申請人所有資料&nbsp;&nbsp;
+<a href="{% url 'add-activityuser' %}" class="btn btn-success">新增</a>&nbsp;&nbsp;</h2>
+<!--<a href="add_venueinstance" class="btn btn-success">新增2</a>&nbsp;&nbsp;</h2>-->
+<form action="." method="POST" name="form2">
+
+{% csrf_token %}
 
 <table class="table table-bordered table-striped">
 <thead class="thead-dark">
   <tr>
-	  <!--<th>編號</th>--><th>身份別</th><th>姓名</th><th>部門</th>
+	  <th>編號</th><th>身份別</th><th>姓名</th><th>部門</th>
 	  <th>信箱</th><th>電話</th><th>雲端分機</th><th>管理</th>
   </tr>
 </thead>
 <tbody>
 	{% for actusers in activityusers %}
 		<tr>
-			<!--<td>{{ venue.id }} </td>-->
+			<td>{{ actusers.id }} </td>
 			<td>{{  actusers.identity }} </td>
 			<td>{{ actusers.name}} </td>
 			<td>{{ actusers.department }} </td>
@@ -21,13 +28,14 @@
 			<td>{{ actusers.telephone}} </td>
 			<td>{{ actusers.extension }} </td>
             <td><!--need to modify-->
-                <a href="{% url 'venue-edit' actusers.id %}" title="編輯" class="btn btn-info">編輯</a>	
-                <a href="{% url 'venue-delete' actusers.id %}" title="刪除" class="btn btn-danger">刪除</a>
+                <a href="{% url 'activityuser-edit' actusers.id %}" title="編輯" class="btn btn-info">編輯</a>	
+                <a href="{% url 'activityuser-delete' actusers.id %}" title="刪除" class="btn btn-danger">刪除</a>
             </td>
 		</tr>
 	{% endfor %}
 </tbody>
 </table>
+</div>
 
   <!--<p>Welcome to LocalLibrary, a website developed by <em>Mozilla Developer Network</em>!</p>
   
