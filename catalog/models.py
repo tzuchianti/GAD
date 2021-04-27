@@ -65,7 +65,7 @@ class VenueInstance(models.Model):
     activity_name = models.TextField('活動名稱', max_length=50)
     activity_attr =  models.CharField('活動屬性', max_length=10)
     activity_category =  models.CharField('活動類別',max_length=10)
-    activity_people = models.IntegerField('活動人數', null = True,blank=True)
+    activity_people = models.CharField('活動人數', max_length=10, null = True, blank=True, default=100)
     activity_start = models.DateTimeField('活動開始', default=timezone.now, null = True,blank=True)
     activity_end = models.DateTimeField('活動結束', null = True,blank=True)
     meals_number =  models.IntegerField('用餐人數', blank=True,default=0)

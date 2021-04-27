@@ -42,11 +42,11 @@ ACTIVITY_CATEGORY_CHOICES = [
     ('研習，教學', '研習，教學' ),
     ('共修，集會', '共修，集會'),
 ]
-# ACTIVITY_PEOPLE_CHOICES = [
-#     ('100人以下', '100人以下'),
-#     ('100-500人', '100-500人'),
-#     ('500人以上', '500人以上'),
-# ]
+ACTIVITY_PEOPLE_CHOICES = [
+    ('100人以下', '100人以下'),
+    ('100-500人', '100-500人'),
+    ('500人以上', '500人以上'),
+]
 
 class   VenueInstanceForm(ModelForm):
     class Meta:
@@ -77,8 +77,8 @@ class   VenueInstanceForm(ModelForm):
             'activity_attr':forms.CheckboxSelectMultiple(choices=ACTIVITY_ATTR_CHOICES,),
             #'activity_category':forms.TextInput(attrs={'class':'form-control', }),
             'activity_category':forms.CheckboxSelectMultiple(choices=ACTIVITY_CATEGORY_CHOICES,),
-            'activity_people':forms.TextInput(attrs={'class':'form-control', }),
-            #'activity_people':forms.CheckboxSelectMultiple(choices=ACTIVITY_PEOPLE_CHOICES,),
+            #'activity_people':forms.TextInput(attrs={'class':'form-control', }),
+            'activity_people':forms.CheckboxSelectMultiple(choices=ACTIVITY_PEOPLE_CHOICES,),
             'activity_start':forms.TextInput(attrs={'class':'form-control',}),
             'activity_end':forms.TextInput(attrs={'class':'form-control', }),
             'meals_number':forms.TextInput(attrs={'class':'form-control', }),
