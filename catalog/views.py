@@ -9,6 +9,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import  permission_required
 import uuid
 
+import logging
+logger = logging.getLogger('django')
 
 @permission_required('catalog.can_mark_returned')
 @permission_required('catalog.can_edit')

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #add our new application
     'catalog.apps.CatalogConfig', # This object was create for us in /catalog/apps.py
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,31 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL ='/catalog'
 LOGOUT_REDIRECT_URL = 'login'
+
+LOGGING = {
+    'version': 1,
+    'loggers': {
+        'django':{
+            'handlers':['file'],  #這裡指定log後寫一個檔案出來
+            'level':'DEBUG'  #這裡可以參見Django官方說明文件      
+}
+    },
+    'handlers':{
+        'file':{
+            'level':'DEBUG',
+            'class':'logging.FileHandler',
+            'filename':'./log.log',   #log檔案位置
+            'formatter':'format_demo'
+        }
+    },
+    #'filters':{
+
+    #},
+    'formatters':{
+        'format_demo':{
+            'format':'{levelname} {asctime} {module} {process:d} {thread:d} {message}',   
+            'style': '{',
+        }
+    }
+
+}

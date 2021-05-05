@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import Venue, VenueInstance, ActivityUser
 import uuid
-
+#from .widgets import XDSoftDateTimePickerInput
 #create a venue form
 
 class VenueForm(ModelForm):
@@ -81,6 +81,7 @@ class   VenueInstanceForm(ModelForm):
             #'activity_people':forms.TextInput(attrs={'class':'form-control', }),
             'activity_people':forms.CheckboxSelectMultiple(choices=ACTIVITY_PEOPLE_CHOICES,),
             'activity_start':forms.TextInput(attrs={'class':'form-control',}),
+            #'activity_start':forms.DateTimeInput(format='%d/%m%Y %H:%M', widget=XDSoftDateTimePickerInput()),
             'activity_end':forms.TextInput(attrs={'class':'form-control', }),
             'meals_number':forms.TextInput(attrs={'class':'form-control', }),
             'sound_control':forms.TextInput(attrs={'class':'form-control', }),
