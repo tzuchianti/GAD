@@ -69,7 +69,7 @@ class VenueInstance(models.Model):
     activity_start = models.DateTimeField('活動開始', default=timezone.now, null = True,blank=True)
     activity_end = models.DateTimeField('活動結束', null = True,blank=True)
     meals_number =  models.IntegerField('用餐人數', blank=True,default=0)
-    sound_control =  models.BooleanField('音控志工', default=False)
+    sound_control =  models.CharField('音控志工', max_length=8)
     space_use =  models.CharField('空間使用滿意度', max_length=10, help_text='請給分  1分最低5分最高')
     user_service =  models.CharField('人員服務滿意度', max_length=10, help_text='請給分  1分最低5分最高')
     report =  models.BooleanField('是否回報', default=False)

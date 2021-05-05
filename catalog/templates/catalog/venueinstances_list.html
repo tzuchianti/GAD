@@ -5,7 +5,7 @@
 <table class="table table-bordered table-striped">
 <thead class="thead-dark">
   <tr>
-	  <!--<th>編號</th>--><th>活動名稱</th><th>活動屬性</th><th>活動類別</th>
+	  <th>會所名稱</th><th>場地名稱</th>-<th>活動名稱</th><th>活動屬性</th><th>活動類別</th>
 	  <th>活動人數</th><th>活動開始</th><th>活動結束</th><th>用餐人數</th>
     <th>音控志工</th><!--<th>場地管理人</th><th>Ext.</th>--><th>管理</th>
   </tr>
@@ -13,8 +13,9 @@
 <tbody>
 	{% for veninst in venueinstances %}
 		<tr>
-			<!--<td>{{ venue.id }} </td>-->
-			<td>{{  veninst.activity_name }} </td>
+			<td>{{ veninst.venue.club_name }} </td>
+			<td>{{ veninst.venue.site_name }} </td>
+			<td>{{ veninst.activity_name }} </td>
 			<td>{{ veninst.activity_attr}} </td>
 			<td>{{ veninst.activity_category }} </td>
 			<td>{{ veninst.activity_people }} </td>

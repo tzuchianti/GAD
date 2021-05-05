@@ -17,6 +17,9 @@ logger = logging.getLogger('django')
 def  my_view(request):
    pass
 
+
+
+
 class LoanedVenuesByUserListView(LoginRequiredMixin,generic.ListView):
     """Generic class-based view listing books on loan to current user."""
     model = VenueInstance
@@ -74,7 +77,8 @@ def venues(request):
     return render(request, 'catalog/venue_list.html', context=context)
     #return render(request, 'index.html', {'venues':venues, 'current_year':current_year,})
 
-
+def analysis(request):
+    return HttpResponse("統計分析")
 
 class VenueDetailView(generic.DetailView):
     model = Venue
@@ -128,7 +132,8 @@ def add_activityuser(request):
                 submitted = True
             return render(request, 'catalog/add_activityuser.html', {'form':form, 'submitted':submitted})
 
-#venueinstanceform  setting
+#venueinstanceform  setting 
+# 日期輸入格式不正確，網頁會顯示錯誤
 def  add_venueinstance(request):
     submitted = False
     if request.method == "POST" :

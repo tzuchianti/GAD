@@ -21,4 +21,5 @@ urlpatterns = [
     path('delete/<int:id>',views.venuedelete, name = 'venue-delete'),
     path('activityuser_list/delete/<int:id>',views.activityuserdelete, name = 'activityuser-delete'),
     path('venueinstance_list/delete/<uuid:id>',views.venueinstancedelete, name = 'venueinstance-delete'),
+    path('analysis/', views.analysis ,name = 'analysis'),
 ]

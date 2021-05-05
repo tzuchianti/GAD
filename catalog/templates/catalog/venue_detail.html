@@ -11,6 +11,10 @@
   <p><strong>容納人數:</strong> {{ venue.capacity }}</p>
   <p><strong>影音設備:</strong> {{ venue.av_device }}</p>
   <p><strong>適合活動:</strong> {{ venue.suitable }}</p>
+  <p><strong>場地照片:</strong> </p>
+  
+  {% comment %}
+
   <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 
   <div style="margin-left:20px;margin-top:20px">
@@ -24,4 +28,5 @@
     <p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
     {% endfor %}
   </div>
+  {% endcomment %}
 {% endblock %}

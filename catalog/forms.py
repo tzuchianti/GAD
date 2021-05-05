@@ -48,6 +48,10 @@ ACTIVITY_PEOPLE_CHOICES = [
     ('100到500人', '100到500人'),
     ('500人以上', '500人以上'),
 ]
+SOUND_CONTROL_CHOICES = [
+    ('需要', '需要'),
+    ('不需要', '不需要'),
+]
 
 class   VenueInstanceForm(ModelForm):
     class Meta:
@@ -84,7 +88,8 @@ class   VenueInstanceForm(ModelForm):
             #'activity_start':forms.DateTimeInput(format='%d/%m%Y %H:%M', widget=XDSoftDateTimePickerInput()),
             'activity_end':forms.TextInput(attrs={'class':'form-control', }),
             'meals_number':forms.TextInput(attrs={'class':'form-control', }),
-            'sound_control':forms.TextInput(attrs={'class':'form-control', }),
+            #'sound_control':forms.TextInput(attrs={'class':'form-control', }),
+            'sound_control':forms.CheckboxSelectMultiple(choices=SOUND_CONTROL_CHOICES,),
         }
         
 class ActivityUserForm(ModelForm):
