@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import Venue, VenueInstance, ActivityUser
 import uuid
+from django.forms import ModelChoiceField
 #from .widgets import XDSoftDateTimePickerInput
 #create a venue form
 
@@ -53,9 +54,13 @@ SOUND_CONTROL_CHOICES = [
     ('不需要', '不需要'),
 ]
 
+# class DateTimeInput(forms.DateTimeInput):
+#     input_type = 'datetime'
+
 class   VenueInstanceForm(ModelForm):
     class Meta:
         model = VenueInstance
+        #form.VenueInstance.queryset = Venue.objects.filter(Venue.request.club_name)
         fields = "__all__"
         exclude = ['space_use', 'user_service', 'report', 'message', 'status', 'borrower']
         #field = ['id', 'venue', 'activity_start', 'activity_end', 'activity_name', 'activity_attr','activity_category', 'activity_people', 'meals_number', 'sound_control',]
@@ -67,7 +72,9 @@ class   VenueInstanceForm(ModelForm):
             'activity_category':'活動類別 ',
             'activity_people':'活動人數 ',
             'activity_start':'活動開始',
+            'time_start':'開始',
             'activity_end':'活動結束',
+            'time_end':'結束',
             'meals_number':'用餐人數',
             'sound_control':'音控志工',         
             'space_use':'空間使用滿意度',
@@ -77,6 +84,10 @@ class   VenueInstanceForm(ModelForm):
             'status':'場地狀態',               
         }
         widgets = {
+            'id':forms.TextInput(attrs={'class':'form-control', }),
+            #'venue':forms.TextInput(attrs={'class':'form-control', }),
+            'venue':forms.Select(attrs={'class':'form-control', }),
+            #'venue':forms.ModelChoiceField(queryset=Venue.objects.all(),empty_label=None),
             'activity_name':forms.TextInput(attrs={'class':'form-control', }),
             #'activity_attr':forms.TextInput(attrs={'class':'form-control', }),
             'activity_attr':forms.CheckboxSelectMultiple(choices=ACTIVITY_ATTR_CHOICES,),
@@ -84,9 +95,13 @@ class   VenueInstanceForm(ModelForm):
             'activity_category':forms.CheckboxSelectMultiple(choices=ACTIVITY_CATEGORY_CHOICES,),
             #'activity_people':forms.TextInput(attrs={'class':'form-control', }),
             'activity_people':forms.CheckboxSelectMultiple(choices=ACTIVITY_PEOPLE_CHOICES,),
-            'activity_start':forms.TextInput(attrs={'class':'form-control',}),
+            'activity_start':forms.DateInput(attrs={'type':'date','class':'form-control'}),
+            'time_start':forms.TimeInput(attrs={'type':'time','class':'form-control'}),
             #'activity_start':forms.DateTimeInput(format='%d/%m%Y %H:%M', widget=XDSoftDateTimePickerInput()),
-            'activity_end':forms.TextInput(attrs={'class':'form-control', }),
+            #'activity_end':forms.DateTimeInput(format='%d/%m/e':'datetime-lo%Y %H:%M' ,attrs={'typcal'}),
+            'activity_end':forms.DateInput(attrs={'type':'date','class':'form-control'}),
+            'time_end':forms.TimeInput(attrs={'type':'time','class':'form-control'}),
+            #'activity_end':DateTimeInput(),
             'meals_number':forms.TextInput(attrs={'class':'form-control', }),
             #'sound_control':forms.TextInput(attrs={'class':'form-control', }),
             'sound_control':forms.CheckboxSelectMultiple(choices=SOUND_CONTROL_CHOICES,),

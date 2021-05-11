@@ -204,6 +204,11 @@ def venueinstanceedit(request, id=0):
             form.save()
         return redirect('venueinstances-list')
 
+##########report####################
+def venueinstancereport(request):
+    return HttpResponse("回報成功")
+
+
 ##############Delete################
 def venuedelete(request, id):
     venue = Venue.objects.get(pk = id)

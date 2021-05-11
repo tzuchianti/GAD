@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 from datetime import date
 from django.utils import timezone
-
+from django.forms import ModelForm
+#from datetime import datetime
 
 ##################   general model #############################
 class ActivityUser(models.Model):
@@ -38,7 +39,7 @@ class Venue(models.Model):
     capacity =   models.IntegerField('容納人數', blank=True,null=True)
     av_device =  models.CharField('影音設備', max_length=40)
     suitable = models.CharField('適合活動', max_length=40)
-    photo = models.FileField
+    photo = models.ImageField
     venuemanager = models.ForeignKey('VenueManager', on_delete=models.SET_NULL, null=True, blank=True )
     
     def __str__(self):
@@ -66,8 +67,11 @@ class VenueInstance(models.Model):
     activity_attr =  models.CharField('活動屬性', max_length=10)
     activity_category =  models.CharField('活動類別',max_length=10)
     activity_people = models.CharField('活動人數', max_length=15, null = True, blank=True, default=100)
-    activity_start = models.DateTimeField('活動開始', default=timezone.now, null = True,blank=True)
-    activity_end = models.DateTimeField('活動結束', null = True,blank=True)
+    #activity_start = models.DateTimeField('活動開始', default=timezone.now, null = True,blank=True)
+    activity_start = models.DateField('活動開始', null = True,blank=True)
+    time_start = models.TimeField('開始',null = True,blank=True)
+    activity_end = models.DateField('活動結束', null = True,blank=True)
+    time_end = models.TimeField('結束', null = True,blank=True)
     meals_number =  models.IntegerField('用餐人數', blank=True,default=0)
     sound_control =  models.CharField('音控志工', max_length=8)
     space_use =  models.CharField('空間使用滿意度', max_length=10, help_text='請給分  1分最低5分最高')
