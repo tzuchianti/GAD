@@ -6,7 +6,8 @@ urlpatterns = [
      path('venues/', views.venues, name='venues'),
     # path('',views.index,name='index'),
     # path('venues/', views.VenueListView.as_view(), name='venues'),
-    path('venue/<int:pk>/', views.VenueDetailView.as_view(), name='venue-detail'),
+    #path('venue/<int:pk>/', views.VenueDetailView.as_view(), name='venue-detail'),
+    path('venue/<int:id>/', views.venue_detail, name='venue-detail'),
     path('activityusers_list/', views.activityusers_list, name = 'activityusers-list'),
     #path('activityusers/',views.ActivityUserListView.as_view(), name ='activityusers'),
     path('venueinstances_list/', views.venueinstances_list, name='venueinstances-list'),
@@ -23,4 +24,6 @@ urlpatterns = [
     path('venueinstance_list/delete/<uuid:id>/',views.venueinstancedelete, name = 'venueinstance-delete'),
     path('venueinstance_report/', views.venueinstancereport, name='venueinstance-report'),
     path('analysis/', views.analysis ,name = 'analysis'),
+    
+    path('imagefield/', views.image_field, name='image-field'),
 ]

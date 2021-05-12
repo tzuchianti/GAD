@@ -5,15 +5,25 @@
   <h1> 場地資料瀏覽 </h1>
 
  {% if venue_list  %}
-  <ul>
+
+ <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for venue in venue_list %}
-      <li>
-        <a href="{{ venue.get_absolute_url }}">{{ venue.site_name }}</a> ({{venue.club_name}})
-      </li>
-    {% endfor %}
-  </ul>
+
+  <div class="col">
+<div class="card" style="width: 16rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{venue.club_name}}</h5>
+    <p class="card-text">{{ venue.site_name }}</p>
+    <a href="{{ venue.get_absolute_url }}" class="btn btn-primary">場地詳情</a>
+  </div>
+</div>
+</div>
+ {% endfor %}
+   </div> 
   {% else %}
     <p>There are no site in the Venue.</p>
   {% endif %} 
 
 {% endblock %}
+

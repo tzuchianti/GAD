@@ -14,3 +14,26 @@
   <p> 你已經拜訪此頁面  {{ num_visits }} {% if num_visits == 1 %} time {% else %} 次 {% endif %} </p>
 </div>
 
+
+<!--index for loop-->
+{% for venue in venue_list %}
+      <li>
+        <a href="{{ venue.get_absolute_url }}">{{ venue.site_name }}</a> ({{venue.club_name}})
+      </li>
+    {% endfor %}
+
+
+
+{% for venue in venue_list %}
+ <div class="col-xs-3 col-sm-3 col-md-3"   >
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{venue.club_name}}</h5>
+    <p class="card-text">{{ venue.site_name }}</p>
+    <a href="{{ venue.get_absolute_url }}" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+</div>
+ {% endfor %}
+

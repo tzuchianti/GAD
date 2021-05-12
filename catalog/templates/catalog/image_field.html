@@ -1,0 +1,118 @@
+{% extends "base_generic.html" %}
+<!--{% comment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UploadImage</title>
+</head>
+<body>
+{% endcomment%}-->
+
+{%block upload%}
+<form action   ="{% url 'image-field' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <span>場地名稱:</span><input type="text" name="sitename " placeholder="please input username">
+    <br/>
+    <span>場地圖片:</span><input type="file" name='icon'>
+    <br/>
+    <button>上傳</button>
+</form>
+
+<!--nothing happen-->
+<div class="row">
+    {% for img in imgs %}
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <p><strong>場地照片:</strong></p>
+            <img class="card-img-top" src="{{img.photo.url}}" />
+          </div>
+      </div>
+      {% endfor %}
+</div>
+
+
+
+
+<form>
+                <p>請選擇區域</p>
+                <select id="list1"></select>
+                <br>
+                <p>縣市</p>
+                <select id="list2"></select>
+                <br>
+                <p>鄉鎮</p>
+                <select id="list3"></select>
+</form>
+
+<script>
+// 產出第一層
+                var colleges=['北','中','南'];
+
+                var inner="";
+                for(var i=0;i<colleges.length;i++){
+
+                    inner+=`<option value=i>${colleges[i]}</option>`;
+                }
+                $("#list1").html(inner);//寫入
+                var noIndex;//第二層的index
+                //選擇第一層後，產出第二層
+                var sectors=new Array();
+                sectors[0]=['台北 ',' 桃園' ,' 新竹' ];
+                sectors[1]=['台中','彰化',' 苗栗 '];	
+                sectors[2]=['高雄 ','屏東',' 台南 '];	
+                 $("#list1").change(function(){
+                    index=this.selectedIndex;//第一層的index
+                    noIndex =index;
+                    console.log('no1',this.selectedIndex);
+                    console.log('第二層的長度',sectors[index].length);//第二層的長度
+                    console.log('第二層選擇的陣列',sectors[index]);//第二層選擇的陣列
+                    var Sinner="";
+                    for(var i=0;i<sectors[index].length;i++){
+                       // Sinner=Sinner+'<option value=i>'+sectors[index][i]+'</option>';
+                       Sinner+=`<option value=i>${sectors[index][i]}</option>`;
+
+                    }
+                    $("#list2").html(Sinner);
+                   
+                    // 第三層
+                var sectorss=new Array();
+                sectorss[0]=['台北 ',' 桃園',' 新竹 '];
+                sectorss[1]=['台中 ',' 彰化',' 苗栗 '];	
+                sectorss[2]=['高雄 ','屏東 ',' 台南 '];		
+
+                sectorss[0][0]=['中山 ',' 松山' ,' 士林' ];
+                sectorss[0][1]=['中壢 ',' 內壢' ,' 楊梅' ];
+                sectorss[0][2]=['竹北 ',' 竹東' ,' 內灣' ];
+                sectorss[1][0]=['太平 ',' 大甲' ,' 清水' ];
+                sectorss[1][1]=['員林 ',' 田中' ,' 彰化' ];
+                sectorss[1][2]=['通宵 ',' 苑里' ,' 三義' ];
+                sectorss[2][0]=['鳳山 ',' 楠梓' ,' 鼓山' ];
+                sectorss[2][1]=['枋山 ',' 林邊' ,' 佳東' ];
+                sectorss[2][2]=['南科 ',' 永康' ,' 保安' ];
+                   
+                   console.log(sectorss);
+
+
+                $("#list2").change(function(){
+                    index=this.selectedIndex;
+                    console.log('no2',this.selectedIndex);
+                    var Sinner3="";
+                    console.log('0000',sectorss[noIndex]);
+                    for(var i=0;i<sectorss[noIndex][index].length;i++){
+                        Sinner3=Sinner3+'<option value=i>'+sectorss[noIndex][index][i]+'</option>';
+                    }
+                    $("#list3").html(Sinner3);
+                });
+
+                $("#list2").change();
+
+                });
+                $("#list1").change();
+</script>
+<!--</body>
+</html>-->
+{% endblock %}
+

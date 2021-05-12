@@ -1,19 +1,36 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>場地名稱: {{ venue.site_name }}</h1>
+
+<h1>場地名稱: {{ venuedetail.site_name }}</h1>
+
 
   <!--<p><strong>Author:</strong> <a href="">{{ venue.area }}</a></p> -->
   <!-- author detail link not yet defined -->
-  <p><strong>地區:</strong> {{ venue.area }}</p>
-  <p><strong>會所名稱:</strong> {{ venue.club_name }}</p>
-  <p><strong>場地特性:</strong> {{ venue.site_feature }}</p>
-  <p><strong>容納人數:</strong> {{ venue.capacity }}</p>
-  <p><strong>影音設備:</strong> {{ venue.av_device }}</p>
-  <p><strong>適合活動:</strong> {{ venue.suitable }}</p>
-  <p><strong>場地照片:</strong> </p>
-  
-  {% comment %}
+  <p><strong>地區:</strong> {{ venuedetail.area }}</p>
+  <p><strong>會所名稱:</strong> {{ venuedetail.club_name }}</p>
+  <p><strong>場地特性:</strong> {{ venuedetail.site_feature }}</p>
+  <p><strong>容納人數:</strong> {{ venuedetail.capacity }}</p>
+  <p><strong>影音設備:</strong> {{ venuedetail.av_device }}</p>
+  <p><strong>適合活動:</strong> {{ venuedetail.suitable }}</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <p><strong>場地照片:</strong></p>
+            <img class="card-img-top" src="{{venuedetail.photo}}" />
+          </div>
+      </div>
+</div>
+
+    {% comment %}
+    <div>
+  <p><strong>場地照片:</strong><img src="{{venue.photo.url}}" />
+  {{ venue.photo }}
+  </p>
+  </div>
+
+
 
   <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 

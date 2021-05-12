@@ -10,7 +10,7 @@ class VenueForm(ModelForm):
     class Meta:
         model = Venue
         fields = "__all__"
-        exclude = ['activityuser']
+        exclude = ['activityuser','c_name']
         labels = {
             'site_name': '場地名稱',
             'activityuser' : '選擇活動申請人',
@@ -32,6 +32,7 @@ class VenueForm(ModelForm):
             'capacity': forms.TextInput(attrs = {'class':'form-control', }),
             'av_device': forms.TextInput(attrs = {'class':'form-control', }),
             'suitable': forms.TextInput(attrs = {'class':'form-control', }),
+            'photo' :forms.FileInput(attrs = {'class':'form-control', }),
         }
 
 ACTIVITY_ATTR_CHOICES = [
@@ -71,10 +72,10 @@ class   VenueInstanceForm(ModelForm):
             'activity_attr':'活動屬性',
             'activity_category':'活動類別 ',
             'activity_people':'活動人數 ',
-            'activity_start':'活動開始',
-            'time_start':'開始',
-            'activity_end':'活動結束',
-            'time_end':'結束',
+            'activity_start':'活動開始時間',
+            'time_start':'活動開始時間',
+            'activity_end':'活動結束日期',
+            'time_end':'活動結束時間',
             'meals_number':'用餐人數',
             'sound_control':'音控志工',         
             'space_use':'空間使用滿意度',

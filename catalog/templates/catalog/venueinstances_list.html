@@ -6,7 +6,7 @@
 <thead class="thead-dark">
   <tr>
 	  <th>會所名稱</th><th>場地名稱</th>-<th>活動名稱</th><th>活動屬性</th><th>活動類別</th>
-	  <th>活動人數</th><th>活動開始</th><th>活動結束</th><th>用餐人數</th>
+	  <th>活動人數</th><th>開始日期</th><th>開始時間</th><th>結束日期</th><th>結束時間</th><th>用餐人數</th>
     <th>音控志工</th><!--<th>場地管理人</th><th>Ext.</th>--><th>管理</th>
   </tr>
 </thead>
@@ -20,7 +20,9 @@
 			<td>{{ veninst.activity_category }} </td>
 			<td>{{ veninst.activity_people }} </td>
 			<td>{{ veninst.activity_start}} </td>
+			<td>{{ veninst.time_start}} </td>
 			<td>{{ veninst.activity_end }} </td>
+			<td>{{ veninst.time_end }} </td>
       		<td>{{ veninst.meals_number }} </td>
       		<td>{{ veninst.sound_control }} </td>
       <!--<td>{{ venue.venuemanager }} </td>

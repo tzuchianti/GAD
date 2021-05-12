@@ -18,7 +18,19 @@ def  my_view(request):
    pass
 
 
-
+def image_field(request):
+    if request.method == "GET":
+        return render(request, 'catalog/image_field.html', )
+    elif request.method =="POST":
+        sitename = request.POST.get("sitename")
+        icon = request.FILES.get("icon")
+        venue=Venue()
+        venue.site_name = sitename
+        venue.photo = icon
+        venue.save()
+        return HttpResponse("上傳成功")
+        
+        
 
 class LoanedVenuesByUserListView(LoginRequiredMixin,generic.ListView):
     """Generic class-based view listing books on loan to current user."""
@@ -80,8 +92,29 @@ def venues(request):
 def analysis(request):
     return HttpResponse("統計分析")
 
-class VenueDetailView(generic.DetailView):
-    model = Venue
+
+# class VenueDetailView(generic.DetailView):
+#     model = Venue
+    
+def venue_detail(request,id):
+    form = VenueForm()
+    venuedetail = Venue.objects.get(pk=id)
+    imgs=Venue.objects.all()
+    context = {
+        'form': form,
+        'venuedetail':venuedetail,
+        'imgs':imgs,
+    }
+    # print(type(imgs))
+    # print(imgs)
+    # print(type(venuedetail))
+    # print(venuedetail)
+    return render(request, 'catalog/venue_detail.html', context=context)
+    # sitename = request.GET.get("sitename")
+    # site =Venue.objects.get(site_name = sitename)
+    # print(site.photo.url)
+
+    
     
 # class ActivityUserListView(generic.ListView):
 #     model = ActivityUser

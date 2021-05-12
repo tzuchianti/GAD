@@ -138,6 +138,12 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL ='/catalog'
 LOGOUT_REDIRECT_URL = 'login'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/upload')
+
 LOGGING = {
     'version': 1,
     'loggers': {
