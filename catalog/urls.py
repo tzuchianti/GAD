@@ -26,4 +26,5 @@ urlpatterns = [
     path('analysis/', views.analysis ,name = 'analysis'),
     
     path('imagefield/', views.image_field, name='image-field'),
+    path('imageshow/',views.image_show,name='image-show'),
 ]

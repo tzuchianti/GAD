@@ -17,7 +17,7 @@ logger = logging.getLogger('django')
 def  my_view(request):
    pass
 
-
+#測試圖片上傳
 def image_field(request):
     if request.method == "GET":
         return render(request, 'catalog/image_field.html', )
@@ -29,8 +29,34 @@ def image_field(request):
         venue.photo = icon
         venue.save()
         return HttpResponse("上傳成功")
-        
-        
+    
+#測試顯示圖片        
+def image_show(request):
+    sitename = request.GET.get("sitename")
+    site = Venue.objects.get(site_name=sitename)
+    
+    #print("/static/upload"+site.photo.url)
+ 
+    data ={
+        "sitename":sitename,
+        "icon_url":"/static/upload"+site.photo.url,
+    }
+    return render(request, 'catalog/image_show.html', context=data)
+    
+# class VenueDetailView(generic.DetailView):
+#     model = Venue
+    
+def venue_detail(request,id):
+    form = VenueForm()
+    venuedetail = Venue.objects.get(pk=id)
+    print(venuedetail)
+    context = {
+        #'form': form,
+        'venuedetail':venuedetail,
+        #加上這行會顯示圖片（不會遍歷詳細資料），但是沒有圖片的會所則無法正常顯示
+        #'icon_url':"/static/upload"+venuedetail .photo.url,
+    }
+    return render(request, 'catalog/venue_detail.html', context=context)
 
 class LoanedVenuesByUserListView(LoginRequiredMixin,generic.ListView):
     """Generic class-based view listing books on loan to current user."""
@@ -40,6 +66,7 @@ class LoanedVenuesByUserListView(LoginRequiredMixin,generic.ListView):
 
     def get_queryset(self):
         return VenueInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('activity_end')
+
 # class MyView(LoginRequiredMixin, View):
 #     login_url = '/login/'
 #     redirect_field_name = 'redirect_to'
@@ -54,23 +81,18 @@ class IndexListView(generic.ListView):
 
 def venues(request):
     """View function for home page of site."""
-
     #get currnet year
     now = datetime.now()
     current_year = now.year
     # Generate counts of some of the main objects
     num_venues = Venue.objects.all().count()
     num_instances = VenueInstance.objects.all().count()
-    
     users_list = ActivityUser.objects.all()
     venues = Venue.objects.all().order_by('-id')
-    
     # Available books (status = 'a')
     num_instances_available = VenueInstance.objects.filter(status__exact='a').count()
-
     # The 'all()' is implied by default.
     num_activityusers = ActivityUser.objects.count()
-    
     #Number of visits to this view , as counted in the session variable.
     num_visists = request.session.get('num_visits' ,0)
     request.session['num_visits'] = num_visists + 1
@@ -87,35 +109,11 @@ def venues(request):
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'catalog/venue_list.html', context=context)
-    #return render(request, 'index.html', {'venues':venues, 'current_year':current_year,})
 
 def analysis(request):
     return HttpResponse("統計分析")
-
-
-# class VenueDetailView(generic.DetailView):
-#     model = Venue
-    
-def venue_detail(request,id):
-    form = VenueForm()
-    venuedetail = Venue.objects.get(pk=id)
-    imgs=Venue.objects.all()
-    context = {
-        'form': form,
-        'venuedetail':venuedetail,
-        'imgs':imgs,
-    }
-    # print(type(imgs))
-    # print(imgs)
-    # print(type(venuedetail))
-    # print(venuedetail)
-    return render(request, 'catalog/venue_detail.html', context=context)
-    # sitename = request.GET.get("sitename")
-    # site =Venue.objects.get(site_name = sitename)
-    # print(site.photo.url)
-
-    
-    
+   
+##################################################    
 # class ActivityUserListView(generic.ListView):
 #     model = ActivityUser
 #     template_name = 'activityusers/activityuser_list.html' 
